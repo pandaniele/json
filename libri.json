@@ -1,0 +1,20 @@
+{
+    "libreria": 
+        {
+
+    "libri":[{
+    "genere":"fantasy",
+    "titolo":"Lo Hobbit",
+    "autore":"J.R.R.Tolkien",
+    "prezzo": 9.787
+    },
+    {
+    "genere":"fantasy",
+    "titolo":"Il signore degli anelli",
+    "autore":"J.R.R.Tolkien",
+    "prezzo": 30.0
+        }]
+
+        }
+}
+

@@ -10,13 +10,21 @@ package prova;
  * @author pandl
  */
 import java.io.*;
-import javax.json.*;
+import java.io.InputStream;
+import java.util.ArrayList;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonValue;
+
+
 
 public class JSONreader {
     public static final String JSON_FILE="libri.json";
     
     public static void main(String[] args) throws IOException{
-        Libro libri[];
+           ArrayList<Libro> libri;
         InputStream input=new FileInputStream(JSON_FILE);
         
         //creazione di un oggetto JsonReader
@@ -38,7 +46,7 @@ public class JSONreader {
       //lettura dell'array JSON "libri" e dimensionamento dell'array JAVA
       
       JsonArray jsonArray=innerJsonObject.getJsonArray("libri");
-      libri= new Libro[jsonArray.size()];
+      libri= new ArrayList<Libro>();
       
       //ciclo di lettura dei singoli elementi dell'array
       int index=0;
@@ -50,13 +58,13 @@ public class JSONreader {
             libro.setAutore(element.asJsonObject().getString("autore"));
             libro.setPrezzo((float)(element.asJsonObject().getJsonNumber("prezzo").doubleValue()));
             
-            libri[index++]=libro;
+            libri.add(libro);
       }
       
         //ciclo di visualizzazione dell'array Java
         
-        for(index=0; index<libri.length; index++){
-            System.out.println(libri[index]);
+        for(index=0; index<libri.size(); index++){
+            System.out.println(libri.get(0).getAutore());
         }
     }
     

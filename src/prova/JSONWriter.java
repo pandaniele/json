@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
+import java.util.Iterator;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
@@ -66,17 +67,17 @@ public class JSONWriter {
             //STRINGA JSON =OGGETTO JSON
             //VALORI POSSONO ESSERE OGGETTI.
                BufferedReader tastiera=new BufferedReader(new InputStreamReader(System.in));
-            OutputStream output;
+            
+               OutputStream output;
         try {
             output = new FileOutputStream(tastiera.readLine());
-             JsonWriter jsonWriter = Json.createWriter(output);
-        
-        jsonWriter.writeObject(rootObject.build());
-        
-        jsonWriter.close();
+            try (JsonWriter jsonWriter = Json.createWriter(output)) {
+                jsonWriter.writeObject(rootObject.build());
+            }
         
         output.close();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             Logger.getLogger(JSONWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
         

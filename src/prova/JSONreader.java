@@ -12,6 +12,8 @@ package prova;
 import java.io.*;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -21,11 +23,19 @@ import javax.json.JsonValue;
 
 
 public class JSONreader {
-    public static final String JSON_FILE="libri.json";
     
-    public static void main(String[] args) throws IOException{
-           ArrayList<Libro> libri;
-        InputStream input=new FileInputStream(JSON_FILE);
+    //public static final String JSON_FILE="libri.json";
+    
+    public static void main(String[] args){
+         BufferedReader tastiera=new BufferedReader(new InputStreamReader(System.in));   
+         ArrayList<Libro> libri;
+           try {
+      
+     
+        InputStream input;
+     
+            input = new FileInputStream(tastiera.readLine());
+        
         
         //creazione di un oggetto JsonReader
         
@@ -40,12 +50,15 @@ public class JSONreader {
         jsonReader.close();
         input.close();
         
-        //lettura dell'oggetto JSON valore della propieta' biblioteca
+        
+          //lettura dell'oggetto JSON valore della propieta' biblioteca
       JsonObject innerJsonObject= jsonObject.getJsonObject("libreria");
       
       //lettura dell'array JSON "libri" e dimensionamento dell'array JAVA
       
       JsonArray jsonArray=innerJsonObject.getJsonArray("libri");
+       
+      
       libri= new ArrayList<Libro>();
       
       //ciclo di lettura dei singoli elementi dell'array
@@ -66,6 +79,14 @@ public class JSONreader {
         for(index=0; index<libri.size(); index++){
             System.out.println(libri.get(0).getAutore());
         }
+        
+       
+            }
+            catch (IOException ex) {
+            System.out.print("ERRORE DI LETTURA");
+        }
+        
+       
     }
     
     

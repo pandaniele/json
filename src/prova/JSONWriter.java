@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
@@ -25,7 +27,7 @@ import javax.json.JsonWriter;
 public class JSONWriter {
    // public static final String JSON_FILE="libri.json";
     
-    public static void main(String [] args) throws IOException{
+    public static void main(String [] args){
         
         
         ArrayList<Libro> libri = new ArrayList<Libro>();
@@ -64,15 +66,21 @@ public class JSONWriter {
             //STRINGA JSON =OGGETTO JSON
             //VALORI POSSONO ESSERE OGGETTI.
                BufferedReader tastiera=new BufferedReader(new InputStreamReader(System.in));
-            OutputStream output = new FileOutputStream(tastiera.readLine());
-        
-        JsonWriter jsonWriter = Json.createWriter(output);
+            OutputStream output;
+        try {
+            output = new FileOutputStream(tastiera.readLine());
+             JsonWriter jsonWriter = Json.createWriter(output);
         
         jsonWriter.writeObject(rootObject.build());
         
         jsonWriter.close();
         
         output.close();
+        } catch (IOException ex) {
+            Logger.getLogger(JSONWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
     
 }
 }

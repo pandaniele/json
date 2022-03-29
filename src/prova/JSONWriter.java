@@ -10,9 +10,11 @@ package prova;
  * @author pandl
  */
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import javax.json.Json;
@@ -21,8 +23,10 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
 
 public class JSONWriter {
-    public static final String JSON_FILE="libri.json";
+   // public static final String JSON_FILE="libri.json";
+    
     public static void main(String [] args) throws IOException{
+        
         
         ArrayList<Libro> libri = new ArrayList<Libro>();
   
@@ -59,7 +63,8 @@ public class JSONWriter {
             rootObject.add("libreria", booksObject.build());
             //STRINGA JSON =OGGETTO JSON
             //VALORI POSSONO ESSERE OGGETTI.
-            OutputStream output = new FileOutputStream(JSON_FILE);
+               BufferedReader tastiera=new BufferedReader(new InputStreamReader(System.in));
+            OutputStream output = new FileOutputStream(tastiera.readLine());
         
         JsonWriter jsonWriter = Json.createWriter(output);
         
